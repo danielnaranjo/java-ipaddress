@@ -32,9 +32,9 @@ public class Main {
 		SpringApplication.run(Main.class, args);
 	}
 
-	@GetMapping("/")
-	public String demo(HttpServletRequest request) throws UnknownHostException {
-		return String.format(request.getHeader("X-FORWARDED-FOR"), request.getRemoteAddr());
+	@GetMapping("/ip")
+	public String main(HttpServletRequest request) throws UnknownHostException {
+		return String.format("Remote IP Address:  %s", request.getRemoteAddr());
 	}
 	
   
