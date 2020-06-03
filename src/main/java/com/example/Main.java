@@ -19,7 +19,6 @@ package com.example;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -33,19 +32,9 @@ public class Main {
 		SpringApplication.run(Main.class, args);
 	}
 
-	@GetMapping("/hello")
-	public String hello(@RequestParam(value = "name", defaultValue = "World") String name) throws UnknownHostException {
-		return String.format("Hello %s!", name);
-	}
-
-	@GetMapping("/ip")
-	public String address() throws UnknownHostException {
-		return String.format("Local IP Address %s!", InetAddress.getLocalHost().getHostAddress());
-	}
-
-	@GetMapping("/demo")
+	@GetMapping("/")
 	public String demo(HttpServletRequest request) throws UnknownHostException {
-		return String.format("Remote IP Address:  %s %s", request.getHeader("X-FORWARDED-FOR"), request.getRemoteAddr());
+		return String.format(request.getHeader("X-FORWARDED-FOR"), request.getRemoteAddr());
 	}
 	
   
