@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import javax.servlet.http.HttpServletRequest;
 
 @SpringBootApplication
 @RestController
@@ -38,8 +39,13 @@ public class Main {
 	}
 
 	@GetMapping("/ip")
-	public String main() throws UnknownHostException {
-		return String.format(InetAddress.getLocalHost().getHostAddress());
+	public String address() throws UnknownHostException {
+		return String.format("Local IP Address %s!", InetAddress.getLocalHost().getHostAddress());
+	}
+
+	@GetMapping("/demo")
+	public String demo(HttpServletRequest request) throws UnknownHostException {
+		return String.format("Remote IP Address:  %s %s", request.getHeader("X-FORWARDED-FOR"), request.getRemoteAddr());
 	}
 	
   
